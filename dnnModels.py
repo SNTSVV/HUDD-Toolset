@@ -139,77 +139,7 @@ class MaxPool2d(nn.MaxPool2d):
         R = self.X * C
         self.HM = R
         return R
-
-
-class KPNet(nn.Module):
-    def __init__(self):
-        super(KPNet, self).__init__()
-        in_channel = 1
-        out_conv2d_1 = 64 + 32  # 96
-        out_conv2d_2 = 64 + 32  # 96
-        out_conv2d_3 = 128 + 64  # 192
-        out_conv2d_4 = 128 + 64  # 192
-        out_conv2d_5 = 32 * 5 + 64  # 224
-        out_conv2d_6 = 32 * 5 + 64  # 224
-        out_conv2d_trans_1 = 128
-        n_class = 27  # the number of coordinates
-
-        self.conv2d_1 = Conv2d(in_channels=in_channel, out_channels=out_conv2d_1, kernel_size=3, padding=1)
-        self.conv2d_2 = Conv2d(in_channels=out_conv2d_1, out_channels=out_conv2d_2, kernel_size=3, padding=1)
-
-        self.maxpool_1 = MaxPool2d(kernel_size=2, stride=2)
-        self.conv2d_3 = Conv2d(in_channels=out_conv2d_2, out_channels=out_conv2d_3, kernel_size=3, padding=1)
-        self.conv2d_4 = Conv2d(in_channels=out_conv2d_3, out_channels=out_conv2d_4, kernel_size=3, padding=1)
-
-        self.maxpool_2 = MaxPool2d(kernel_size=2, stride=2)
-        self.conv2d_5 = Conv2d(in_channels=out_conv2d_4, out_channels=out_conv2d_5, kernel_size=3, padding=1)
-        self.conv2d_6 = Conv2d(in_channels=out_conv2d_5, out_channels=out_conv2d_6, kernel_size=1, padding=0)
-
-        self.conv2d_trans_1 = ConvTranspose2d(in_channels=out_conv2d_6, out_channels=out_conv2d_trans_1, kernel_size=2,
-                                              stride=2, bias=False)
-        self.conv2d_trans_2 = ConvTranspose2d(in_channels=out_conv2d_trans_1, out_channels=n_class, kernel_size=2,
-                                              stride=2, bias=False)
-        return
-
-    def forward(self, x):
-        # print(self.conv2d_1(x))
-        x = F.relu(self.conv2d_1(x))
-        # self.conv2d_1.Y = x
-        x = F.relu(self.conv2d_2(x))
-        # x = F.max_pool2d(x,kernel_size=2, stride=2)
-        x = self.maxpool_1(x)
-        x = F.relu(self.conv2d_3(x))
-        x = F.relu(self.conv2d_4(x))
-        # x = F.max_pool2d(x,kernel_size=2, stride=2)
-        x = self.maxpool_2(x)
-        x = F.relu(self.conv2d_5(x))
-        x = F.relu(self.conv2d_6(x))
-        x = F.relu(self.conv2d_trans_1(x))
-        x = self.conv2d_trans_2(x)
-        # print(x.size())
-        return x
-
-    def relprop(self, R):
-        R = self.conv2d_trans_2.relprop(R)
-        R = self.conv2d_trans_1.relprop(R)
-        R = self.conv2d_6.relprop(R)
-        R = self.conv2d_5.relprop(R)
-        R = self.maxpool_2.relprop(R)
-        R = self.conv2d_4.relprop(R)
-        R = self.conv2d_3.relprop(R)
-        R = self.maxpool_1.relprop(R)
-        R = self.conv2d_2.relprop(R)
-        R = self.conv2d_1.relprop(R)
-        return R
-    def modifyToTrain(self):
-        for param in self.conv2d_1.parameters():
-            param.requires_grad = False
-        for param in self.conv2d_2.parameters():
-            param.requires_grad = False
-        for param in self.conv2d_3.parameters():
-            param.requires_grad = False
-        for param in self.conv2d_4.parameters():
-            param.requires_grad = False
+    
 class AlexNet(nn.Module):
 
     def __init__(self, num_classes):

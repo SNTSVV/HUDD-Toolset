@@ -1,7 +1,6 @@
 #
 # Copyright (c) IEE, University of Luxembourg 2019-2020.
 # Created by Fabrizio Pastore, fabrizio.pastore@uni.lu, SNT, 2019.
-# Created by Jun WANG, jun.wang@iee.lu, IEE, 2019.
 # Modified by Hazem FAHMY, hazem.fahmy@uni.lu, SNT, 2019.
 #
 

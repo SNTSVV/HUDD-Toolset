@@ -1,4 +1,7 @@
-
+#
+# Copyright (c) University of Luxembourg 2019-2020.
+# Created by Hazem FAHMY, hazem.fahmy@uni.lu, SNT, 2019.
+#
 import processImages as labelImages
 from imports import os, pd, sc, stat, np, math, json, cv2, join, torch, basename, dirname
 

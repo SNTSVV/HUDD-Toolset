@@ -1,3 +1,8 @@
+#
+# Copyright (c) University of Luxembourg 2019-2020.
+# Created by Fabrizio Pastore, fabrizio.pastore@uni.lu, SNT, 2019.
+# Modified by Hazem FAHMY, hazem.fahmy@uni.lu, SNT, 2019.
+#
 from imports import os, cv2, json, np, math
 def label():
     outputPath = ""

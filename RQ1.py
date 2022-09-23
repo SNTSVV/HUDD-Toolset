@@ -1,3 +1,7 @@
+#
+# Copyright (c) University of Luxembourg 2019-2020.
+# Created by Hazem FAHMY, hazem.fahmy@uni.lu, SNT, 2019.
+#
 import paramsModule as pM
 from imports import np, os, math, sc, stat, pd, torch, Workbook, dataframe_to_rows, join, basename
 

@@ -1,3 +1,5 @@
+xfun::pkg_load2(c("htmltools", "mime"))
+
 # HUDD (Heatmap-based Unsupervised Debugging of DNNs)
 
 This repository contains the tools and the data of the paper "Supporting Deep Neural Network Safety Analysis and Retraining Through Heatmap-Based Unsupervised Learning" by H. Fahmy, F. Pastore, M. Bagherzadeh, and L. Briand, published in the [IEEE Transactions on Reliability](https://ieeexplore.ieee.org/abstract/document/9439863) and [2022 IEEE/ACM 44th International Conference on Software Engineering: Companion Proceedings (ICSE-Companion)](https://ieeexplore.ieee.org/document/9793750); available for download [here](https://arxiv.org/abs/2002.00863)

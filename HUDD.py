@@ -57,17 +57,10 @@ if __name__ == '__main__':
     #HUDD.updateCaseFile()
     finalResultDict = {}
     datasetName = basename(args.outputPathX)
-    # assModes = ["Centroid", "ClosestICD", "jICD", "SSEICD", "ClosestMem"]
     if args.HUDDmode == "HUDD":
         if datasetName == "FLD":
             if args.faceSubSet is None:
                 maxSub = 0.0
-                for subset in components:
-                    print(subset)
-                    # ResultDict, _ = HUDD.KPNet(subset)
-                    # HUDD.faceSubset = subset
-                    # HUDD.updateCaseFile()
-                    # HUDD.saveResult()
             else:
                 print(args.faceSubSet)
                 ResultDict, _ = HUDD.KPNet(args.faceSubSet)
@@ -88,27 +81,16 @@ if __name__ == '__main__':
             ResultDict, _ = HUDD.KPNet(args.faceSubSet)
         else:
             ResultDict, _ = HUDD.AlexNet()
-    elif args.HUDDmode == "concepts":
-        #RQ2.run(HUDD.modelName, HUDD.outputPath, HUDD.datasetName, HUDD.modelPath, HUDD.numClass, HUDD.modelArch)
-        if datasetName == "FLD":
-            ResultDict, _ = HUDD.KPNet(args.faceSubSet)
-        else:
-            #HUDD.faceSubset = "CC"
-            #HUDD.faceSubset = "CC"
-            HUDD.faceSubset = "CC"
-            HUDD.updateCaseFile()
-            HUDD.generateConcepts()
     elif args.HUDDmode == "xplain":
         HUDD.explain()
     elif args.HUDDmode == "params":
         HUDD.faceSubset = args.faceSubSet
         HUDD.getParams()
     elif args.HUDDmode == "HUDD":
-        HUDD.KPNet(None)
-    elif args.HUDDmode == "finetune":
-        HUDD.TLDNN()
-    elif args.HUDDmode == "newdata":
-        HUDD.generateDataSet()
+        if datasetName == "FLD":
+            ResultDict, _ = HUDD.KPNet(None)
+        else:
+            ResultDict, _ = HUDD.AlexNet()
     elif args.HUDDmode == "train":
         HUDD.train()
     elif args.HUDDmode == "RQ1":
@@ -128,5 +110,3 @@ if __name__ == '__main__':
     elif args.HUDDmode == "assignImages":
         HUDD.selectLayer()
         HUDD.assignImages()
-    elif args.HUDDmode == "injectFaults":
-        HUDD.injectFaults()

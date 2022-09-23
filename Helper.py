@@ -6,30 +6,15 @@
 from __future__ import print_function
 
 import RQ1, RQ2
-import simulatorModule
 from imports import PathImageFolder, torch, os, argparse, setupTransformer, np, Variable, cv2, pd, random, shutil, \
     itemgetter, math, stat, datasets, imageio, join, isfile, exists, basename, Image, tqdm, hashlib, makedirs, tf
-import ieedatavendor as ieeDV
 import testModule, dnnModels, HeatmapModule, clusterModule, assignModule, retrainModule, ieepredict, paramsModule, dataSupplier
-#import conceptModule
-#import train_cnn
-#import anchors
-#from pulp import *
-#import pulp
-#from data_reader import DataReader
-import injectFaults
 
 components = ["noseridge", "nose", "mouth", "rightbrow", "righteye", "lefteye"]
 
 class Helper(object):
     def KPNet(self, faceSubset):  # IEE
-        #self.faceSubset = faceSubset
-        #self.outputPath = self.outputPathOriginal
         self.saveResult()
-        #self.outputPath = join(self.outputPathOriginal, faceSubset)
-        #print("here")
-        #if not exists(self.outputPath):
-        #    os.mkdir(self.outputPath)
         self.generateHeatmaps()
         self.generateHMDistances()
         self.generateClusters()
@@ -48,84 +33,11 @@ class Helper(object):
         return self.ResultDict, self.assignMode
 
     def AlexNet(self):  # GD - OC - ASL - TS - AC - HPD - OD
-        srcPath = join(self.outputPathOriginal, "IEEPackage", "Data")
-        # mmod = join(self.outputPathOriginal, "IEEPackage", "clsdata/mmod_human_face_detector.dat")
-        # print(srcPath)
-        # ieeDV.generate_data(srcPath, "./kaggledata/training.csv", mmod, srcPath)
-        # predictor = ieepredict.IEEPredictor(join(srcPath, "ieetest.npy"), self.modelPath, True, self.numClass, 0)
-        # npPath = join(srcPath, "ieetest.npy")
-        # simDataSet, _ = predictor.load_data(npPath)
-        # counter, _ = predictor.predict(simDataSet, None, srcPath, False, None, 1, False, None)
-        # ieeDV.labelHPDimages(npPath, simDataSet, join(srcPath, "Labeled"), "H", 1)
-        # return
-        # testModule.testErrorAlexNet(self.DNN, self.caseFile, self.improveDataSet, True, self.improveCSV)
-        # self.improveDataNpy = self.improveDataSet
-        # self.updateCaseFile()
-        # HeatmapModule.saveHeatmaps(self.caseFile, "I")
-        # self.generateHMDistances()
-        # for layer in self.layers:
-        # testModule.testErrorAlexNet(self.DNN, self.caseFile, self.improveDataSet, True, self.improveCSV)
-        # self.DNN.lrp([], 'simple', 1.0)
-        #self.DNN = dnnModels.ConvModel()
-        #R = self.DNN.forward(None)
-        #self.DNN.relprob(self.DNN.y)
-        # train_cnn.main()
-        # print()
-        # return
-        #anchors.getAnchor(self.caseFile)
-        #return
-
-        #ieeDV.exportIEEImages(self.realDataSet, join(self.realDataPath), "R", 1)
-        #return
-        #self.saveResult()
-        #self.generateHeatmaps()
-        #self.generateHMDistances()
-        #self.generateClusters()
+        self.saveResult()
+        self.generateHeatmaps()
+        self.generateHMDistances()
+        self.generateClusters()
         self.selectLayer()
-        self.assignImages()
-        return
-        dstPath = join(self.DataSetsPath, "BIWI", "all")
-        dstPath2 = join(self.DataSetsPath, "BIWI", "config")
-        dict_ = {'data': [], 'config': []}
-        list_ = ["01", "02", "03", "04", "05"]
-        counter = 1
-        for s in list_:
-            for src_dir, dirs, files in os.walk(join(self.DataSetsPath, "BIWI", s)):
-                for file_ in files:
-                    if (file_.endswith(".jpg")) or (file_.endswith(".png")) or (file_.endswith(".ppm")):
-                        print(counter, end="\r")
-                        imgPath = join(src_dir, file_)
-                        fileName = file_.split(".png")[0]
-                        poseName = fileName.split("_")
-                        txtFile = poseName[0] + "_" + poseName[1] + "_pose.txt"
-                        posePath = join(src_dir, txtFile)
-                        lab = searchModule.labelBIWI(posePath)
-                        shutil.copy(posePath, join(dstPath2, str(counter) + ".txt"))
-
-                        if not exists(join(dstPath, lab)):
-                            os.makedirs(join(dstPath, lab))
-                        newimgPath = join(dstPath, lab, str(counter) + ".png")
-                        faceFound = searchModule.processBIWI(imgPath, self.dlibPath, newimgPath)
-                        if not faceFound:
-                            print("failed")
-                        # shutil.copy(imgPath, join(dstPath, lab, str(counter)+".png"))
-                        # dict_['data'].append()
-                        # dict_['config'].append()
-                        counter += 1
-        # self.generateClusters()
-        # clusterModule.twoPass(self.caseFile, "Layer15", False, join(self.caseFile["filesPath"], "Layer15" + "HMDistance.xlsx"), join(self.caseFile["filesPath"]))
-
-        # self.selectLayer()
-
-        ieeDV.exportIEEImages(self.realDataSet, join(self.realDataPath), "R", 1)
-        return
-        self.selectLayer()
-        # self.saveResult()
-        # self.generateHeatmaps()
-        # self.generateHMDistances()
-        # self.generateClusters()
-        # self.selectLayer()
-        # self.searchImages()
         if self.RQ1A:
             if self.datasetName.startswith("HPD"):
                 RQ1.IEERQ1(self.caseFile)
@@ -306,25 +218,8 @@ class Helper(object):
                 #self.Epochs = 17
                 self.datasetName = datasetName
                 self.modelName = modelName if (modelName is not None) else "25_pretrainedModel.pth"
-                # self.modelName_S = "16_finetunedModel.pth" #"25_pretrainedModel.pth
-                # self.modelName_S = "9_finetunedModel.pth" #"18_pretrainedModel.pth"
-                # self.modelName_S = "18_pretrainedModel.pth" #"18_pretrainedModel.pth"
-                # self.modelName_S = "28_finetunedModel.pth" #"18_pretrainedModel.pth"
-                #self.modelName_S = "25_pretrainedModel.pth" #HPD2
                 self.modelName_S = "pretrainedModel.pth" #HPD-TR
-                #self.modelName_S = "18_pretrainedModel.pth" #HPD1
-                # self.modelName = "16_finetunedModel.pth" #"25_pretrainedModel.pth
-                # self.modelName = "9_finetunedModel.pth" #"18_pretrainedModel.pth"
-                #self.modelName = "25_pretrainedModel.pth" #HPD2
-                #self.modelName = "18_pretrainedModel.pth" #HPD2
-                #self.modelName = "28_finetunedModel.pth" #HPD2
                 self.modelName = "pretrainedModel.pth" #HPD-TR
-                #self.modelName = "9_finetunedModel.pth" #HPD1
-                # self.modelName_R = "16_finetunedModel.pth" #"25_pretrainedModel.pth
-                # self.modelName_R = "9_finetunedModel.pth" #"18_pretrainedModel.pth"
-                # self.modelName_R = "25_pretrainedModel.pth" #"18_pretrainedModel.pth"
-                # self.modelName_R = "18_pretrainedModel.pth" #"18_pretrainedModel.pth"
-                #self.modelName_R = "28_finetunedModel.pth" #"18_pretrainedModel.pth"
                 self.modelName_R = "pretrainedModel.pth" #HPD-TR
                 #self.modelName_R = "9_finetunedModel.pth" #HPD1 #"18_pretrainedModel.pth"
                 net = dnnModels.AlexNetIEE(self.numClass)
@@ -435,152 +330,6 @@ class Helper(object):
         self.selectLayer()
         xplainModule.run(self.caseFile)
 
-    def generateDataSet(self):
-        srcPath = join(self.outputPathOriginal, "IEEPackage", "Data")
-        # searchModule.generateRandomImage(srcPath)
-        # self.caseFile["SimDataPath"] = join(self.caseFile["filesPath"], "NewTestSet")
-        # x = 0
-        # for i in range(0, 2799):
-        #    print(i, end="\r")
-        #    imgPath, faceFound = searchModule.generateAnImage(searchModule.setX(1, "R"), self.caseFile)
-        #    N, DNNResult, P, L, D, _ = searchModule.doImage(imgPath+".png", self.caseFile, None)
-        #    if DNNResult:
-        #        x += 1
-        # print(100* x/2800)
-        # return
-        # mmod = join(self.outputPathOriginal, "IEEPackage", "clsdata/mmod_human_face_detector.dat")
-        # ieeDV.generate_data(srcPath, "./kaggledata/training.csv", mmod, srcPath)
-        ieeDV.generate_data(srcPath, "./kaggledata/training.csv", mmod, srcPath)
-        # predictor = ieepredict.IEEPredictor(join(srcPath, "ieetest.npy"), self.modelPath, True, self.numClass, 0)
-        # npPath = join(srcPath, "ieetest.npy")
-        # simDataSet, _ = predictor.load_data(npPath)
-        # counter, _ = predictor.predict(simDataSet, None, srcPath, False, None, 1, False, None)
-        # ieeDV.labelHPDimages(npPath, simDataSet, join(srcPath, "Labeled"), "H", 1)
-        labeledPath = join(srcPath, "Labeled")
-        dataSupplier.labelImages(labeledPath)
-
-    def generateConcepts(self):
-        if self.datasetName == "FLD":
-            self.caseFile["selectedLayer"] = "Layer9"
-            self.selectedLayer = "Layer9"
-        else:
-            # self.caseFile["selectedLayer"] = "Layer15"
-            # self.caseFile["selectedLayer"] = "Layer13"
-            # self.selectedLayer = "Layer15"
-            # self.selectedLayer = "Layer13"
-            self.selectLayer()
-        # UnsafeSpace = {'clusters': {1: {'members': []}}}
-        UnsafeSpace = {'clusters': {}}
-        if self.Alex:
-            if self.faceSubset == "CC":
-                # imageList = pd.read_csv(self.testCSV)
-                imageList = pd.read_csv(self.improveCSV)
-                imageList2 = pd.read_csv(self.trainCSV)
-                classes = ['BottomLeft', 'BottomRight', 'MiddleCenter',
-                           'BottomCenter', 'MiddleRight', 'MiddleLeft']
-                #    , 'TopLeft', 'TopRight', 'TopCenter']
-                # classes = ['Opened', 'Closed']
-                UnsafeSpace['clusters'] = {}
-                for classA in classes:
-                    UnsafeSpace['clusters'][classA] = {'members': []}
-                    num = 0
-                    numA = 0
-                    for index, row in imageList.iterrows():
-                        if row["result"] == "Correct":
-                            if row["expected"] == classA:
-                                numA += 1
-                                if num < 150:
-                                    UnsafeSpace['clusters'][classA]['members'].append(
-                                        "Test_" + basename(row["image"]).split(".")[0] + "_" + str(row["expected"]))
-                                num += 1
-                    # num = 0
-                    # numA = 0
-                    # for index, row in imageList2.iterrows():
-                    #    if row["result"] == "Correct":
-                    #        if row["expected"] == classA:
-                    #            numA += 1
-                    #            if num < 75:
-                    #                UnsafeSpace['clusters'][classA]['members'].append("Train_"+basename(row["image"]).split(".")[0]+"_"+str(row["expected"]))
-                    #            num += 1
-                    print(classA, num, numA)
-                # clsWithAssImages = UnsafeSpace
-            elif self.faceSubset == "HOF":
-                for img in os.listdir(join(self.caseFile["filesPath"], "Heatmaps", "Layer15")):
-                    UnsafeSpace['clusters'][1]['members'].append(img.split(".")[0])
-                clsWithAssImages = UnsafeSpace
-            else:
-                self.caseFile["clsPath"] = join(self.outputPathOriginal, self.RCC, "ClusterAnalysis_" +
-                                                str(self.clustMode), self.selectedLayer + ".pt")
-                print(self.selectedLayer)
-                clsWithAssImages = torch.load(self.caseFile["clsPath"], map_location=torch.device('cpu'))
-                for clusterID in clsWithAssImages['clusters']:
-                    UnsafeSpace['clusters'][1] = {'members': []}
-                    for img in clsWithAssImages['clusters'][clusterID]['members']:
-                        UnsafeSpace['clusters'][1]['members'].append(img)
-                if self.faceSubset == "None":
-                    clsWithAssImages = UnsafeSpace
-        else:
-            if not self.faceSubset == "all":
-                self.caseFile["clsPath"] = join(self.outputPath, self.RCC, "ClusterAnalysis_" +
-                                                str(self.clustMode), self.selectedLayer + ".pt")
-                clsWithAssImages = torch.load(self.caseFile["clsPath"], map_location=torch.device('cpu'))
-            else:
-                for subset in self.caseFile["components"]:
-                    self.caseFile["clsPath"] = join(self.outputPathOriginal, subset, self.RCC, "ClusterAnalysis_" +
-                                                    str(self.clustMode), self.selectedLayer + ".pt")
-                    clsWithAssImages = torch.load(self.caseFile["clsPath"], map_location=torch.device('cpu'))
-                    for clusterID in clsWithAssImages['clusters']:
-                        for img in clsWithAssImages['clusters'][clusterID]['members']:
-                            UnsafeSpace['clusters'][1]['members'].append(img)
-        clsWithAssImages = torch.load(self.caseFile["clsPath"], map_location=torch.device('cpu'))
-        self.caseFile["faceSubset"] = "None_RCC"
-        if not exists(join(self.caseFile["outputPathOriginal"], "None_RCC", "clsData.pt")):
-            clsData = conceptModule.generateConcepts(clsWithAssImages, self.caseFile)
-            torch.save(clsData, join(self.caseFile["outputPathOriginal"], "None_RCC", "clsData.pt"))
-        else:
-            clsData = torch.load(join(self.caseFile["outputPathOriginal"], "None_RCC", "clsData.pt"))
-        # self.caseFile["faceSubset"] = "CC"
-        # conceptModule.generateConcepts(UnsafeSpace, self.caseFile)
-        # clsWithAssImages = UnsafeSpace
-        # return
-        for clusterID in clsWithAssImages['clusters']:
-            print("**** CLUSTER ****", clusterID)
-            dict_ = {}
-            newList = []
-            conceptRadius = torch.load(
-                join(self.caseFile["outputPathOriginal"], "None_RCC", "ConceptsData", "ConceptsClusters",
-                     # str(clusterID), "conceptsDia.pt"))
-                     str(clusterID), "conceptsRadius.pt"))
-            conceptCentroid = torch.load(
-                join(self.caseFile["outputPathOriginal"], "None_RCC", "ConceptsData", "ConceptsClusters",
-                     str(clusterID), "conceptsCentroids.pt"))
-            for clusterID2 in UnsafeSpace['clusters']:
-                conceptRadius2 = torch.load(
-                    join(self.caseFile["outputPathOriginal"], "CC", "ConceptsData", "ConceptsClusters",
-                         # str(clusterID2), "conceptsDia.pt"))
-                         str(clusterID2), "conceptsRadius.pt"))
-                conceptCentroid2 = torch.load(
-                    join(self.caseFile["outputPathOriginal"], "CC", "ConceptsData", "ConceptsClusters",
-                         str(clusterID2), "conceptsCentroids.pt"))
-                _, _, exclusiveConcepts = conceptModule.analyzeConcepts2(conceptRadius, conceptCentroid, conceptRadius2,
-                                                                         conceptCentroid2)
-
-                for concept in exclusiveConcepts:
-                    if concept not in dict_:
-                        dict_[concept] = 1
-                    else:
-                        dict_[concept] += 1
-            for concept in dict_:
-                if dict_[concept] == len(UnsafeSpace['clusters']):
-                    newList.append(concept)
-
-            conceptRadius = torch.load(
-                join(self.caseFile["outputPathOriginal"], "None_RCC", "ConceptsData", "ConceptsClusters",
-                     str(clusterID), "conceptsRadius.pt"))
-            conceptModule.analyzeConcepts(conceptRadius, conceptCentroid, newList, join(
-                join(self.caseFile["outputPathOriginal"], "None_RCC", "ConceptsData", "ConceptsClusters",
-                     str(clusterID))), clsData['all'][clusterID])
-
     def getParams(self):
         self.selectLayer()
         # self.selectedLayer = "Layer9"
@@ -687,59 +436,6 @@ class Helper(object):
                 os.makedirs(self.caseFile["improveRCCDists"])
             torch.save(self.caseFile, self.caseFile["caseFile"])
 
-    def generateImages(self):
-        filePath = join(self.outputPath, "clustersParamData.npy")
-        if isfile(filePath):
-            clustersData = np.load(filePath, allow_pickle=True)
-            clusterData = clustersData.item()
-            trainHashList = list()
-            for src_dir, dirs, files in os.walk(self.trainDataPath):
-                for file_ in files:
-                    if (file_.endswith(".jpg")) or (file_.endswith(".png")) or (file_.endswith(".ppm")):
-                        imgPath = join(src_dir, file_)
-                        img = Image.open(imgPath)
-                        img.save(join(self.outputPath, "1.PNG"), 'PNG')
-                        m = hashlib.md5()
-                        data = open(join(self.outputPath, "1.PNG"), 'rb').read()
-                        m.update(data)
-                        trainHashList.append(m)
-            os.remove(join(self.outputPath, "1.PNG"))
-            for clusterID in clusterData:
-                i = 0
-                k = 0
-                srcPath = join(self.outputPath, "SimData", "SimulatorData", "Cluster_" + str(clusterID))
-                mmod = join(self.outputPathOriginal, "IEEPackage", "clsdata/mmod_human_face_detector.dat")
-                print(srcPath)
-                if not isfile(join(srcPath, "ieetest.npy")):
-                    ieeDV.generate_data(srcPath, "./kaggledata/training.csv", mmod, srcPath)
-                predictor = ieepredict.IEEPredictor(join(srcPath, "ieetest.npy"), self.modelPath, 0)
-                simDataSet, _ = predictor.load_data(join(srcPath, "ieetest.npy"))
-                counter, _ = predictor.predict(simDataSet, None, srcPath, False, None, 1, False, None)
-                for src_dir, dirs, files in os.walk(join(srcPath, "0_Data")):
-                    for file_ in files:
-                        if (file_.endswith(".jpg")) or (file_.endswith(".png")) or (file_.endswith(".ppm")):
-                            imgPath = join(src_dir, file_)
-                            img = Image.open(imgPath)
-                            img.save(join(self.outputPath, "1.PNG"), 'PNG')
-                            m = hashlib.md5()
-                            data = open(join(self.outputPath, "1.PNG"), 'rb').read()
-                            m.update(data)
-                            i += 1
-                            for hashi in trainHashList:
-                                if m == hashi:
-                                    k += 1
-                print((k / i) * 100, " images are included in the TrainingSet")
-                os.remove(join(self.outputPath, "1.PNG"))
-        else:
-            if self.KP:
-                clustersData = RQ1.IEERQ1(self.caseFile)
-            else:
-                if self.datasetName == "IEE":
-                    clustersData = RQ1.IEERQ1(self.caseFile)
-                else:
-                    clustersData = RQ1.UnityRQ1(self.caseFile)
-            np.save(filePath, clustersData)
-
     def loadDNN(self, net):
         if self.CN:
 
@@ -802,57 +498,6 @@ class Helper(object):
         #    shutil.rmtree(dirPath)
         # shutil.copytree(join(clsPath, self.selectedLayer), dirPath)
         self.updateCaseFile()
-
-    def TLDNN(self):
-
-        retrainModule.fineTune(self.modelPath, self.outputPath, self.datasetName, 10, self.caseFile)
-        return
-        if self.datasetName != "SAP":
-            modelPath = join(self.caseFile["filesPath"], "DNNModels_" + "TL")
-            if not exists(modelPath):
-                makedirs(modelPath)
-            bestModelPath = join(modelPath,"TL." + str(basename(self.modelPath).split(".")[1]))
-            dataTransform = setupTransformer(self.datasetName)
-
-            transformedData2 = PathImageFolder(root=self.caseFile["testDataPath"]+"_S", transform=dataTransform)
-            testData2 = torch.utils.data.DataLoader(transformedData2, batch_size=self.batchSize, shuffle=True,
-                                                   num_workers=self.workersCount)
-            print(self.modelPath)
-            testAccuracy2, resultDictNew = retrainModule.alexTest(self.modelPath, testData2, None, self.datasetName, self.DNN, False, None)
-
-
-            print(testAccuracy2.item())
-            ts = datasets.ImageFolder(root=self.caseFile["trainDataPath"], transform=dataTransform)
-            #tsList.append(ts2)
-            #concatList = torch.utils.data.ConcatDataset(tsList)
-            newTrainDataSet = torch.utils.data.DataLoader(ts, batch_size=self.batchSize, shuffle=True,
-                                                          num_workers=self.workersCount)
-        DNN = retrainModule.fineTune(self.modelPath, self.outputPath, self.datasetName, 100, self.caseFile)
-        if self.datasetName != "SAP":
-            #_, DNN = retrainModule.alexTrain(self.caseFile, 100, newTrainDataSet, bestModelPath, self.DNN, None)
-            #DNN = retrainModule.loadDNN(self.caseFile, bestModelPath)
-
-
-            transformedData = PathImageFolder(root=self.caseFile["testDataPath"], transform=dataTransform)
-            testData = torch.utils.data.DataLoader(transformedData, batch_size=self.batchSize, shuffle=True,
-                                                   num_workers=self.workersCount)
-            testAccuracy, resultDictNew = retrainModule.alexTest(bestModelPath, testData, None, self.datasetName, DNN, False, None)
-            print(testAccuracy.item())
-
-            transformedData2 = PathImageFolder(root=self.caseFile["testDataPath"]+"_S", transform=dataTransform)
-            testData2 = torch.utils.data.DataLoader(transformedData2, batch_size=self.batchSize, shuffle=True,
-                                                   num_workers=self.workersCount)
-            testAccuracy2, resultDictNew = retrainModule.alexTest(bestModelPath, testData2, None, self.datasetName, DNN, False, None)
-            print(testAccuracy2.item())
-
-
-            transformedData2 = PathImageFolder(root=self.caseFile["testDataPath"]+"_R", transform=dataTransform)
-            testData2 = torch.utils.data.DataLoader(transformedData2, batch_size=self.batchSize, shuffle=True,
-                                                   num_workers=self.workersCount)
-            print(self.modelPath)
-            testAccuracy2, resultDictNew = retrainModule.alexTest(bestModelPath, testData2, None, self.datasetName, self.DNN, False, None)
-
-            print(testAccuracy2.item())
 
     def retrainDNN(self):
         if self.retrainFlag:

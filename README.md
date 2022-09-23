@@ -36,13 +36,7 @@ Each of these tar files contains compressed folders, as follows:
 
 ## HUDD Architecture and Code Contents
 
-<object data="./HUDD_tool.pdf" type="application/pdf" width="700px" height="700px">
-    <embed src="./HUDD_tool.pdf">
-        <p>This browser does not support PDFs. Please download the PDF to view it: <a href="http://yoursite.com/the.pdf">Download PDF</a>.</p>
-    </embed>
-</object>
-
-![img1](./HUDD_tool.pdf)
+![img1](./HUDD_tool.png)
 
 * The HUDD tool consists of a command line user interface called (./HUDD.py) and five modules: (./testModule.py), (./heatmapModule.py), (./clusterModule.py), (./assignModule.py), (./retrainModule.py).
 
@@ -89,6 +83,7 @@ For FLD case study:
 	- Put IEEPackage folder in ./TR_Package/FLD/
 	- Put ieetrain.npy, ieetest.npy, ieeimprove.npy in ./TR_Package/FLD/IEEPackage/
 
+![img2](./RealHPDClusters.png)
 
 ## Regeneration of RQ1 raw results (without replicating the whole study)
 

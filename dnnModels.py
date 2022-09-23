@@ -139,7 +139,7 @@ class MaxPool2d(nn.MaxPool2d):
         R = self.X * C
         self.HM = R
         return R
-    
+
 class AlexNet(nn.Module):
 
     def __init__(self, num_classes):

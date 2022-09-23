@@ -1,8 +1,3 @@
-<object data="http://yoursite.com/the.pdf" type="application/pdf" width="700px" height="700px">
-    <embed src="http://yoursite.com/the.pdf">
-        <p>This browser does not support PDFs. Please download the PDF to view it: <a href="http://yoursite.com/the.pdf">Download PDF</a>.</p>
-    </embed>
-</object>
 
 
 # HUDD (Heatmap-based Unsupervised Debugging of DNNs)
@@ -40,6 +35,12 @@ Each of these tar files contains compressed folders, as follows:
 - xx_ImprovementSet.tar.bz2	ImprovementSet images + labels
 
 ## HUDD Architecture and Code Contents
+
+<object data="./HUDD_tool.pdf" type="application/pdf" width="700px" height="700px">
+    <embed src="./HUDD_tool.pdf">
+        <p>This browser does not support PDFs. Please download the PDF to view it: <a href="http://yoursite.com/the.pdf">Download PDF</a>.</p>
+    </embed>
+</object>
 
 ![img1](./HUDD_tool.pdf)
 

@@ -32,7 +32,10 @@ Each of these tar files contains compressed folders, as follows:
 - xx_TrainingSet.tar.bz2		Training set images + labels
 - xx_ImprovementSet.tar.bz2	ImprovementSet images + labels
 
-## Code Contents
+## HUDD Architecture and Code Contents
+
+![img1](./HUDD_tool.pdf)
+
 * The HUDD tool consists of a command line user interface called (./HUDD.py) and five modules: (./testModule.py), (./heatmapModule.py), (./clusterModule.py), (./assignModule.py), (./retrainModule.py).
 
 * To execute HUDD, the engineer provides to the (./Helper.py) the DNN model to be analyzed. The DNN under analysis shall be stored in the DNNModels folder; the datasets shall be provided in the DataSets folders TrainingSet, TestSet, and ImprovementSet.

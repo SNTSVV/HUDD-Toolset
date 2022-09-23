@@ -50,7 +50,7 @@ Each of these tar files contains compressed folders, as follows:
 
 * The [Assignment Module](assignModule.py) processes the ImprovementSet images and stores the unsafe set in the folder UnsafeSet. Finally, the [Retraining Module](retrainModule.py) retrains the DNN using the images in the training and unsafe sets. The retrained DNN model is saved in the DNNModels directory.
 
-## Replication
+## Usage
 
 ![img2](./images/RealHPDClusters.png)
 

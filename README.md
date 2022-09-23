@@ -32,7 +32,20 @@ Each of these tar files contains compressed folders, as follows:
 - xx_TrainingSet.tar.bz2		Training set images + labels
 - xx_ImprovementSet.tar.bz2	ImprovementSet images + labels
 
-## Replication of the whole study
+## Code Contents
+* The HUDD tool consists of a command line user interface called HUDD.py and five modules: testModule.py, heatmapModule.py, clusterModule.py, assignModule.py, retrainModule.py
+
+* To execute HUDD, the engineer provides to the (./Helper.py) the DNN model to be analyzed. The DNN under analysis shall be stored in the DNNModels folder; the datasets shall be provided in the DataSets folders TrainingSet, TestSet, and ImprovementSet.
+
+* The [DNN Testing Module](testModule.py) uses the DNN under analysis to process the inputs in the training and test set. Outputs are exported in the files trainResult.csv and testResult.csv. The latter is used to determine which are the error-inducing images to be used to generate RCCs (Step 1).
+
+* The [Heatmaps Module](heatmapModule.py) generates heatmaps for error-inducing images. For each DNN layer, it stores, in the Heatmaps directory, a NumPy file with the heatmaps of all the error-inducing images.
+
+* The [Clustering Module](clusterModule.py), for each layer, computes the distance matrix and exports it in an XLSX file. Also, it performs hierarchical agglomerative clustering based on the heatmaps generated for each layer and selects the optimal number of clusters. Finally, for each 𝐾𝑡ℎ layer, it stores the generated clusters in a directory called T/ClusterAnalysis/LayerK. The clusters for the layer showing the best results (layer 𝑋 ) are copied in the parent folder (i.e., ./T/LayerX/ ). For each RCC, the ClusterModule generates a directory with all the images belonging to the cluster, which are to be visually inspected by engineers as per HUDD Step 2.
+
+* The [Assignment Module](assignModule.py) processes the ImprovementSet images and stores the unsafe set in the folder UnsafeSet. Finally, the [Retraining Module](retrainModule.py) retrains the DNN using the images in the training and unsafe sets. The retrained DNN model is saved in the DNNModels directory.
+
+## Replication
 
 For each case study, to replicate the whole experient (i.e., generation of root cause clusters + retraining) please proceed as follows.
 

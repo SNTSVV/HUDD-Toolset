@@ -36,7 +36,7 @@ Each of these tar files contains compressed folders, as follows:
 
 ## HUDD Architecture and Code Contents
 
-![img1](./HUDD_tool.png)
+![img1](./images/HUDD_tool.png)
 
 * The HUDD tool consists of a command line user interface called (./HUDD.py) and five modules: (./testModule.py), (./heatmapModule.py), (./clusterModule.py), (./assignModule.py), (./retrainModule.py).
 
@@ -51,6 +51,8 @@ Each of these tar files contains compressed folders, as follows:
 * The [Assignment Module](assignModule.py) processes the ImprovementSet images and stores the unsafe set in the folder UnsafeSet. Finally, the [Retraining Module](retrainModule.py) retrains the DNN using the images in the training and unsafe sets. The retrained DNN model is saved in the DNNModels directory.
 
 ## Replication
+
+![img2](./images/RealHPDClusters.png)
 
 For each case study, to replicate the whole experient (i.e., generation of root cause clusters + retraining) please proceed as follows.
 
@@ -83,7 +85,7 @@ For FLD case study:
 	- Put IEEPackage folder in ./TR_Package/FLD/
 	- Put ieetrain.npy, ieetest.npy, ieeimprove.npy in ./TR_Package/FLD/IEEPackage/
 
-![img2](./RealHPDClusters.png)
+
 
 ## Regeneration of RQ1 raw results (without replicating the whole study)
 

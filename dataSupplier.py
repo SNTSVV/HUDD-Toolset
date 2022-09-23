@@ -1,7 +1,6 @@
 #
 # Copyright (c) IEE 2019-2020.
-# Created by Jun WANG, jun.wang@iee.lu, IEE, 2019.
-# Modified by Hazem FAHMY, hazem.fahmy@uni.lu, SNT, 2019.
+# Created by Hazem FAHMY, hazem.fahmy@uni.lu, SNT, 2019.
 #
 import subprocess as sp
 import pathlib as pl

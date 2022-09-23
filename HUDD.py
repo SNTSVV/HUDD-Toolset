@@ -1,3 +1,8 @@
+#
+# Copyright (c) University of Luxembourg 2019-2020.
+# Created by Hazem FAHMY, hazem.fahmy@uni.lu, SNT, 2019.
+# Modified by Mojtaba Bagherzadeh, m.bagherzadeh@uottawa.ca, University of Ottawa, 2019.
+#
 import Helper, RQ2, RQ1
 from imports import basename, argparse, os, shutil, join, np, exists
 

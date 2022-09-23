@@ -1,3 +1,8 @@
+#
+# Copyright (c) University of Luxembourg 2019-2020.
+# Created by Hazem FAHMY, hazem.fahmy@uni.lu, SNT, 2019.
+# Modified by Mojtaba Bagherzadeh, m.bagherzadeh@uottawa.ca, University of Ottawa, 2019.
+#
 from __future__ import print_function
 
 import RQ1, RQ2

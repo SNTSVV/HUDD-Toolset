@@ -104,10 +104,7 @@ For FLD case study, please put ieetest.npy folder in ./TR_Package/FLD/DataSets/
 If you use our work, please cite HUDD in your publications. Here is an example BibTeX entry:
 ```
 @ARTICLE{9439863,  
-author={Fahmy, Hazem and 
-Pastore, Fabrizio and 
-Bagherzadeh, Mojtaba and 
-Briand, Lionel},  
+author={Fahmy, Hazem and Pastore, Fabrizio and Bagherzadeh, Mojtaba and Briand, Lionel},  
 journal={IEEE Transactions on Reliability},   
 title={Supporting Deep Neural Network Safety Analysis and Retraining Through Heatmap-Based Unsupervised Learning},   
 year={2021},  

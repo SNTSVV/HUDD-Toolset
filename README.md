@@ -14,25 +14,25 @@ We observe three major challenges with existing practices regarding DNNs in safe
 All case studies and DNNs can be downloaded from [here](https://zenodo.org/record/5725116#.Yyc7x-xBzuU)
 The package contains the following files:
 
-  - OC.tar			OC case study
-  - GD.tar			GD case study
-  - HPD.tar			HPD case study 
-  - OD.tar			OD case study
-  - TS.tar			TS case study
-  - FLD.tar			FLD case study
-  - FLD_IEEPackage.tar.bz2	Additional data required to perform landmark detection for FLD case study.
-  - RQ2.tar.bz2 		Toolset to collect data for RQ2 (Python binary files)
+  - OC.tar -> OC case study -> Detection of a driver's open/closed eyes (2 classes)
+  - GD.tar -> GD case study -> Detection of a driver's eyes' gaze direction (8 classes)
+  - HPD.tar -> HPD case study -> Detection of a driver's head pose direction (9 classes)
+  - OD.tar -> OD case study -> Detection of absense/presence of an eye glasses (2 classes)
+  - TS.tar -> TS case study -> Detection of road traffic signs
+  - FLD.tar -> FLD case study -> Detection of 27 facial land marks of a driver's face (nose, eyes, mouth)
+  - FLD_IEEPackage.tar.bz2 -> Additional data required to perform landmark detection for FLD case study.
+  - RQ2.tar.bz2 -> Toolset to collect data for RQ2 (Python binary files)
 
 Each of these tar files contains compressed folders, as follows:
 
-- xx_clusterImages.tar.bz2	Root cause clusters generate by HUDD
-- xx_BL1.tar.bz2			Models retrained using BL1
-- xx_BL2.tar.bz2			Models retrained using BL1
-- xx_HUDD.tar.bz2			Models retrained using HUDD
-- xx_OriginalModel.pth		Original model before retraining
-- xx_TestSet.tar.bz2		Test set images + labels
-- xx_TrainingSet.tar.bz2		Training set images + labels
-- xx_ImprovementSet.tar.bz2	ImprovementSet images + labels
+- xx_clusterImages.tar.bz2 -> Root cause clusters generate by HUDD
+- xx_BL1.tar.bz2 -> Models retrained using BL1
+- xx_BL2.tar.bz2 -> Models retrained using BL2
+- xx_HUDD.tar.bz2 -> Models retrained using HUDD
+- xx_OriginalModel.pth -> Original model before retraining
+- xx_TestSet.tar.bz2 -> Test set images + labels
+- xx_TrainingSet.tar.bz2 -> Training set images + labels
+- xx_ImprovementSet.tar.bz2 -> ImprovementSet images + labels
 
 ## HUDD Architecture and Code Contents
 

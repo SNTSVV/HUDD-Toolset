@@ -124,7 +124,7 @@ For FLD case study, please put ieetest.npy folder in ./TR_Package/FLD/DataSets/
 
 If you use our work, please cite HUDD in your publications. Here is an example BibTeX entry:
 ```
-@ARTICLE{9439863,  
+@ARTICLE{Fahmy_HUDD,  
 author={Fahmy, Hazem and Pastore, Fabrizio and Bagherzadeh, Mojtaba and Briand, Lionel},  
 journal={IEEE Transactions on Reliability},   
 title={Supporting Deep Neural Network Safety Analysis and Retraining Through Heatmap-Based Unsupervised Learning},   
@@ -133,4 +133,16 @@ volume={70},
 number={4},  
 pages={1641-1657},  
 doi={10.1109/TR.2021.3074750}}
+```
+
+OR
+
+```
+@INPROCEEDINGS{Fahmy_HUDD-tool,
+  author={Fahmy, Hazem and Pastore, Fabrizio and Briand, Lionel},
+  booktitle={2022 IEEE/ACM 44th International Conference on Software Engineering: Companion Proceedings (ICSE-Companion)}, 
+  title={HUDD: A tool to debug DNNs for safety analysis}, 
+  year={2022},
+  pages={100-104},
+  doi={10.1145/3510454.3516858}}
 ```

@@ -3,8 +3,8 @@
 # HUDD (Heatmap-based Unsupervised Debugging of DNNs)
 
 This repository contains the tools and the data appearing in: 
-* "**Supporting Deep Neural Network Safety Analysis and Retraining Through Heatmap-Based Unsupervised Learning**" by H. Fahmy, F. Pastore, M. Bagherzadeh, and L. Briand, published in the [IEEE Transactions on Reliability](https://ieeexplore.ieee.org/abstract/document/9439863); available for download [technical paper](https://arxiv.org/abs/2002.00863).
-* "**HUDD: A tool to debug DNNs for safety analysis**" by H. Fahmy, F. Pastore, and L. Briand, presented in [IEEE/ACM 44th International Conference on Software Engineering](https://ieeexplore.ieee.org/document/9793750); available for download [tool paper](https://arxiv.org/abs/2210.08356).
+* "**Supporting Deep Neural Network Safety Analysis and Retraining Through Heatmap-Based Unsupervised Learning**" by H. Fahmy, F. Pastore, M. Bagherzadeh, and L. Briand, published in the [IEEE Transactions on Reliability](https://ieeexplore.ieee.org/abstract/document/9439863); available for [download](https://arxiv.org/abs/2002.00863).
+* "**HUDD: A tool to debug DNNs for safety analysis**" by H. Fahmy, F. Pastore, and L. Briand, presented in [IEEE/ACM 44th International Conference on Software Engineering](https://ieeexplore.ieee.org/document/9793750); available for [download](https://arxiv.org/abs/2210.08356).
 
 # Project Description
 We observe three major challenges with existing practices regarding DNNs in safety-critical systems:
@@ -21,11 +21,11 @@ To address these problems in the context of DNNs analyzing images, we propose He
 All case studies and DNNs can be downloaded from [here](https://zenodo.org/record/5725116#.Yyc7x-xBzuU)
 The package contains the following files:
 
-  - OC.tar -> OC case study -> Detection of a driver's open/closed eyes (2 classes)
-  - GD.tar -> GD case study -> Detection of a driver's eyes' gaze direction (8 classes)
-  - HPD.tar -> HPD case study -> Detection of a driver's head pose direction (9 classes)
-  - OD.tar -> OD case study -> Detection of absense/presence of an eye glasses (2 classes)
-  - TS.tar -> TS case study -> Detection of road traffic signs
+  - OC.tar -> [OC](https://paperswithcode.com/dataset/oc) case study -> Detection of a driver's open/closed eyes (2 classes)
+  - GD.tar -> [GD](https://paperswithcode.com/dataset/gd) case study -> Detection of a driver's eyes' gaze direction (8 classes)
+  - HPD.tar -> [HPD](https://paperswithcode.com/dataset/hpd) case study -> Detection of a driver's head pose direction (9 classes)
+  - OD.tar -> [OD](https://paperswithcode.com/dataset/celeba) case study -> Detection of absense/presence of an eye glasses (2 classes)
+  - TS.tar -> [TS](https://paperswithcode.com/dataset/gtsrb) case study -> Detection of road traffic signs
   - FLD.tar -> FLD case study -> Detection of 27 facial land marks of a driver's face (nose, eyes, mouth)
   - FLD_IEEPackage.tar.bz2 -> Additional data required to perform landmark detection for FLD case study.
   - RQ2.tar.bz2 -> Toolset to collect data for RQ2 (Python binary files)

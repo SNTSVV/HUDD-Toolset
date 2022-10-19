@@ -156,5 +156,5 @@ OR
 
 # Acknowledgment:
 
-This project has received funding from IEE Luxembourg, Luxembourg’s National Research Fund (FNR) under grant BRIDGES2020/IS/14711346/FUNTASY, the European Re- search Council (ERC) under the European Union’s Horizon 2020 research and innovation programme (grant agreement No 694277), and NSERC of Canada under the Discovery and CRC programs. Authors would like to thank Thomas Stifter and Jun Wang from IEE for their valuable support.
+This project has received funding from IEE Luxembourg, Luxembourg’s National Research Fund (FNR) under grant BRIDGES2020/IS/14711346/FUNTASY, the European Research Council (ERC) under the European Union’s Horizon 2020 research and innovation programme (grant agreement No 694277), and NSERC of Canada under the Discovery and CRC programs. Authors would like to thank Thomas Stifter and Jun Wang from IEE for their valuable support.
 The experiments presented in this project were carried out using the HPC facilities of the University of Luxembourg (see http://hpc.uni.lu).

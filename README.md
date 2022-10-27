@@ -158,8 +158,6 @@ doi = {10.1145/3510454.3516858},
 booktitle = {Proceedings of the ACM/IEEE 44th International Conference on Software Engineering: Companion Proceedings},
 pages = {100–104},
 numpages = {5},
-keywords = {DNN debugging, functional safety analysis},
-location = {Pittsburgh, Pennsylvania},
 series = {ICSE '22}
 }
 ```

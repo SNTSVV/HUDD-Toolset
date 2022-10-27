@@ -139,19 +139,29 @@ year={2021},
 volume={70},  
 number={4},  
 pages={1641-1657},  
-doi={10.1109/TR.2021.3074750}}
+doi={10.1109/TR.2021.3074750}
+}
 ```
 
 OR
 
 ```
-@INPROCEEDINGS{Fahmy_HUDD-tool,
-  author={Fahmy, Hazem and Pastore, Fabrizio and Briand, Lionel},
-  booktitle={2022 IEEE/ACM 44th International Conference on Software Engineering: Companion Proceedings (ICSE-Companion)}, 
-  title={HUDD: A tool to debug DNNs for safety analysis}, 
-  year={2022},
-  pages={100-104},
-  doi={10.1145/3510454.3516858}}
+@inproceedings{Fahmy_HUDD_tool,
+author = {Fahmy, Hazem and Pastore, Fabrizio and Briand, Lionel},
+title = {HUDD: A Tool to Debug DNNs for Safety Analysis},
+year = {2022},
+isbn = {9781450392235},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3510454.3516858},
+doi = {10.1145/3510454.3516858},
+booktitle = {Proceedings of the ACM/IEEE 44th International Conference on Software Engineering: Companion Proceedings},
+pages = {100–104},
+numpages = {5},
+keywords = {DNN debugging, functional safety analysis},
+location = {Pittsburgh, Pennsylvania},
+series = {ICSE '22}
+}
 ```
 
 # Acknowledgment:
